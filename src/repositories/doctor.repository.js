@@ -8,7 +8,7 @@ async function finddDoctorByCRMOrEmail(crm, email) {
 }
 
 async function checkAddress(cep){
-    return db.query(`SELECT * FROM addresses WHERE cep=$1;`, [cep])
+    return await db.query(`SELECT * FROM addresses WHERE cep=$1;`, [cep])
 }
 
 async function createDoctorAddress({
@@ -40,7 +40,7 @@ async function createDoctorAddress({
 
 async function createDoctor({
     name, crm, email, password, address_id, specialty_id }) {
-    await db.query(
+    return await db.query(
         `INSERT INTO doctors 
             (name, crm, email, password, address_id, specialty_id) 
             VALUES ($1, $2, $3, $4, $5, $6)`,
@@ -56,7 +56,7 @@ async function findDoctorByEmail(email) {
 }
 
 async function updateDoctorToken(doctor, token) {
-    return db.query(`UPDATE doctors SET token=$1 WHERE id=$2;`,
+    return await db.query(`UPDATE doctors SET token=$1 WHERE id=$2;`,
         [token, doctor.id]);
 }
 

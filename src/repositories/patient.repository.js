@@ -8,14 +8,14 @@ async function findPatientByEmail(email) {
 }
 
 async function createPatient({ name, email, password }) {
-    await db.query(
+    return await db.query(
         `INSERT INTO patients (name, email, password) VALUES ($1, $2, $3)`,
         [name, email, password]
     );
 }
 
-function updatePatientToken(patient, token) {
-    return db.query(`UPDATE patients SET token=$1 WHERE id=$2;`,
+async function updatePatientToken(patient, token) {
+    return await db.query(`UPDATE patients SET token=$1 WHERE id=$2;`,
         [token, patient.id]);
 }
 
