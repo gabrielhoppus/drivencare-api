@@ -13,6 +13,13 @@ function duplicatedEmailError(email) {
     };
 }
 
+function duplicatedError() {
+    return {
+        name: "DuplicatedError",
+        message: "There is already an user with given email or crm",
+    };
+}
+
 function unauthorizedError() {
     return {
         name: "UnauthorizedError",
@@ -40,4 +47,5 @@ export default {
     unauthorizedError,
     notFoundError,
     invalidCredentialsError,
+    duplicatedError
 };
