@@ -17,19 +17,19 @@ async function createPatient({ name, email, password }) {
 async function loginPatient({ email, password }) {
     const {
         rowCount,
-        rows: [patitent],
+        rows: [patient],
     } = await patientRepository.findPatientByEmail(email);
     if (!rowCount) throw errors.invalidCredentialsError();
 
-    const validPassword = await bcrypt.compare(password, patitent.password);
+    const validPassword = await bcrypt.compare(password, patient.password);
     if (!validPassword) throw errors.invalidCredentialsError();
 
-    if (!patitent.token){
-        const token = jwt.sign({ patient_id: patitent.id }, process.env.SECRET_KEY, { expiresIn: 86400 });
+    if (!patient.token){
+        const token = jwt.sign({ patient_id: patient.id }, process.env.SECRET_KEY, { expiresIn: 86400 });
         await patientRepository.updatePatientToken(patient, token);
         return token
     }
-    return patitent.token;
+    return patient.token;
 }
 
 

@@ -5,6 +5,14 @@ function conflictError(message) {
     };
 }
 
+function conflictTimeError(time){
+    return {
+        name: "conflictTimeError",
+        message: "This time slot is not available",
+        time,
+    };
+}
+
 function duplicatedEmailError(email) {
     return {
         name: "DuplicatedEmailError",
@@ -47,5 +55,6 @@ export default {
     unauthorizedError,
     notFoundError,
     invalidCredentialsError,
-    duplicatedError
+    duplicatedError,
+    conflictTimeError
 };

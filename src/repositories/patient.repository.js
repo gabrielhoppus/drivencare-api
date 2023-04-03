@@ -7,6 +7,15 @@ async function findPatientByEmail(email) {
     );
 }
 
+async function findById(id) {
+    return await db.query(
+        `    
+      SELECT * FROM patients WHERE id=$1
+    `,
+        [id]
+    );
+}
+
 async function createPatient({ name, email, password }) {
     return await db.query(
         `INSERT INTO patients (name, email, password) VALUES ($1, $2, $3)`,
@@ -22,5 +31,6 @@ async function updatePatientToken(patient, token) {
 export const patientRepository = {
     findPatientByEmail,
     createPatient,
-    updatePatientToken
+    updatePatientToken,
+    findById
 }
